@@ -17,8 +17,36 @@
 // percentage = 100*11/15 = 73.33333333333333
 
 function infected(s) {
-    console.log(s.split("X"))
-    return 0;
+let zeros = 0
+let ones = 0
+    let splitbyx = s.split("X")
+    let affectedpersons = splitbyx.map(
+    x => {
+        string = ""
+        for (let i of x){
+        console.log(x)
+        console.log(`truefalse = ${x.indexOf(1)}`)
+        if (x.indexOf(1) == 1) {return [x.length,1]} 
+            if (x.indexOf(1) == -1) {return [x.length,0]}
+        }
+    }
+    )
+// accessing the second array
+    let z = affectedpersons.filter(x => {return (typeof(x) == 'object')})
+    console.log(z)
+    for (let i = 0; i< z.length; i++) { 
+        if (z[i][1] === 0) {zeros = zeros + z[i][0]} 
+        else 
+        if (z[i][1] === 1) {ones = ones + z[i][0]}
+        console.log(zeros) 
+        console.log(ones)
+    
+    }
+// math at the end of the problem
+    let numerator = ones
+    let denominator = zeros + ones
+    let final = (numerator/denominator) *100
+    return final
   }
 
-infected('01000000X000X011X0X')
+console.log(infected('01000000X000X011X0X'))
