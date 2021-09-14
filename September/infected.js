@@ -50,3 +50,17 @@ let ones = 0
   }
 
 console.log(infected('01000000X000X011X0X'))
+
+// The proper code is below
+
+function infected(s) {
+
+    if(!(s.includes('0') && s.includes('1'))) return 0;
+    
+    let str = s.split('X').map(el => el.includes('1') ? el.replace(/0/g, '1') : el).join('');
+    
+    let total = str.length;
+    let infect = str.match(/1/g).length;
+    
+    return 100 * infect / total;
+  }
