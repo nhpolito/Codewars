@@ -1,6 +1,12 @@
 # Documenting my Journey in Codewars
 The point of this markdown is to document my progress working in codewars.
 
+**Input and Output**
+
+**Answer**
+
+**Learning Target**
+
 ## Table of Contents
 - [Documenting my Journey in Codewars](#documenting-my-journey-in-codewars)
   - [Table of Contents](#table-of-contents)
@@ -9,6 +15,7 @@ The point of this markdown is to document my progress working in codewars.
       - [Disemvowel](#disemvowel)
       - [Multiples of 3 and 5](#multiples-of-3-and-5)
       - [Count The Odds](#count-the-odds)
+      - [Sum of digital root](#sum-of-digital-root)
         - [TOC](#toc)
     - [October](#october)
     - [November](#november)
@@ -156,6 +163,32 @@ console.log(findOdd([0,1,0,1,4]))
 ```
 **learning Targets**
 -*** I believe that filtered can only return one of the current items, it cannot add something new***"
+
+#### [Sum of digital root](September/sumofdigitalroot.js)
+**Input and Output**
+```
+  16  -->  1 + 6 = 7
+   942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+```
+**Answer**
+
+```JavaScript
+function digital_root(n) {
+  if (n < 10) {return n} 
+  else
+  console.log(n)
+//   recursively calling digital root passing in the reduced version of n as the new n
+  return digital_root(n.toString().split("").reduce((pv, cv) => {return pv + +cv}, 0));
+    
+}
+
+console.log(digital_root(493193));
+```
+
+**Learning Target**
+***you can call a function inside of a function with a different argument***
 ##### [TOC](#table-of-contents)
 
 ### October
