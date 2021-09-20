@@ -2,23 +2,33 @@
 The point of this markdown is to document my progress working in codewars.
 
 **Input and Output**
-
+Is used to show the objective of the function
 **Answer**
-
+Is used to show a working solution
 **Learning Target**
-
+Is used to keep track of techniques used to achieve the solution
 ## Table of Contents
 - [Documenting my Journey in Codewars](#documenting-my-journey-in-codewars)
   - [Table of Contents](#table-of-contents)
     - [September](#september)
       - [Mumbling](#mumbling)
+        - [map, filter, reduce](#map-filter-reduce)
+        - [[string.prototype.repeat(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)]](#stringprototyperepeathttpsdevelopermozillaorgen-usdocswebjavascriptreferenceglobal_objectsstringrepeat)
+        - [Array.prototype.join()](#arrayprototypejoin)
       - [Disemvowel](#disemvowel)
+        - [string.prototype.replace()](#stringprototypereplace)
       - [Multiples of 3 and 5](#multiples-of-3-and-5)
+        - [Array.prototype.reduce()](#arrayprototypereduce)
       - [Count The Odds](#count-the-odds)
+        - [Array.prototype.filter()](#arrayprototypefilter)
       - [Sum of digital root](#sum-of-digital-root)
+        - [recursion](#recursion)
       - [wholikesit?](#wholikesit)
-    - [Array.prototype.shift](#arrayprototypeshift)
-    - [JavaScript Template Literals](#javascript-template-literals)
+        - [Array.prototype.shift](#arrayprototypeshift)
+        - [JavaScript Template Literals](#javascript-template-literals)
+      - [Is this a valid walk?](#is-this-a-valid-walk)
+        - [Array.prototype.reduce](#arrayprototypereduce-1)
+        - [Array.prototype.every](#arrayprototypeevery)
         - [TOC](#toc)
     - [October](#october)
     - [November](#november)
@@ -46,11 +56,13 @@ function accum2(s) {
 console.log(accum2("cwAt"));
 ```
 **Learning Targets**
-
+##### [map, filter, reduce](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/array/reduce)
 -***I learned that the second paramater of map, filter, and reduce is index***
 
+##### [string.prototype.repeat(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)]
 -***the string.prototype.repeat() method will returns new string that contains the specified number of copies of the string on which it was called, concatenated together***
 
+##### [Array.prototype.join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 -***".join(x)" will concatenate an array via the commas, replacing the paramater__***
 #### [Disemvowel](September/disemvowel.js)
 **Input to Output**
@@ -90,7 +102,7 @@ function disemvowel(str) {
 }
 ```
 **Learning Targets**
-
+##### [string.prototype.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 -***The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.***
 -***for example .replace(/[aeiou]/gi,"") will replace vowels with nothing, the g = do a pattern more than once, and the i = upper and lowercase***
 
@@ -133,6 +145,7 @@ function solution(number){
  console.log(solution(10))
  ```
  **Learning Targets**
+ ##### [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
  ***-const reducer = (previousValue, currentValue) => previousValue + currentValue;***
  ***-reduce((previousValue, currentValue, currentIndex, array) => { ... }, initialValue)***
 
@@ -165,7 +178,8 @@ function findOdd(A) {
 console.log(findOdd([0,1,0,1,4]))
 ```
 **learning Targets**
--*** I believe that filtered can only return one of the current items, it cannot add something new***"
+##### [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+-***I believe that filtered can only return an existing item, it cannot return a new item see***
 
 #### [Sum of digital root](September/sumofdigitalroot.js)
 **Input and Output**
@@ -191,6 +205,7 @@ console.log(digital_root(493193));
 ```
 
 **Learning Target**
+##### [recursion](https://developer.mozilla.org/en-US/docs/Glossary/Recursion)
 ***you can call a function inside of a function with a different argument***
 
 #### [wholikesit?](September/wholikesit.js)
@@ -225,9 +240,64 @@ function likes(names) {
 
 ```
 **Learning Target**
-### [Array.prototype.shift](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/array/shift)
+##### [Array.prototype.shift](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/array/shift)
 -***returns the first item of the array***
-### [JavaScript Template Literals](https://www.w3schools.com/JS//js_string_templates.asp)
+##### [JavaScript Template Literals](https://www.w3schools.com/JS//js_string_templates.asp)
+
+#### [Is this a valid walk?](September/isvalidwalk.js)
+**Input and Output**
+```
+Test.expect(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), 'should return true');
+Test.expect(!isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e']), 'should return false');
+Test.expect(!isValidWalk(['w']), 'should return false');
+Test.expect(!isValidWalk(['n','n','n','s','n','s','n','s','n','s']), 'should return false');
+```
+**Answer**
+```JavaScript
+function isValidWalk(walk) {
+  // reduce walk into an object that contains the direction and the amount of times taken that direction
+  let x = walk.reduce((previousValue, currentValue) => {
+    if (!previousValue[currentValue]) {
+      previousValue[currentValue] = 0;
+    }
+    previousValue[currentValue]++;
+
+    return previousValue;
+  }, {});
+  console.log(x)
+  //create an array out of the object that contains the amount of times stepped in each direction
+  let test = Object.values(x);
+  //create a time by counting the total amount of steps (1 step - 1 minutes)
+  let time = test.reduce((pv, cv) => {
+    return cv + pv;
+  });
+  console.log(time);
+  // return false if it does not take 10 minutes
+  if (time != 10) {
+    return false;
+  }
+  // return false if the direction walked was not even
+  console.log(test);
+  if (test.length % 2 != 0) {
+    return false;
+  }
+  // return true if not false so far, and if every value of the test array is equal to the same thing
+  return test.every((value) => {
+    return value == test[0];
+  });
+}
+
+console.log(
+  isValidWalk(["w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w", "e"])
+);
+```
+**Learning Target**
+##### [Array.prototype.reduce](#arrayprototypereduce)
+-***reduce can be initialized with an object to create an object out of array items. For example, here we used reduce create an object of keys that point to the driection, and values that are the amount of times that direction has been pressed***
+
+##### [Array.prototype.every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
+-***The every() method tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.***
+
 ##### [TOC](#table-of-contents)
 
 ### October
