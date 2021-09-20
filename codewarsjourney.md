@@ -16,6 +16,9 @@ The point of this markdown is to document my progress working in codewars.
       - [Multiples of 3 and 5](#multiples-of-3-and-5)
       - [Count The Odds](#count-the-odds)
       - [Sum of digital root](#sum-of-digital-root)
+      - [wholikesit?](#wholikesit)
+    - [Array.prototype.shift](#arrayprototypeshift)
+    - [JavaScript Template Literals](#javascript-template-literals)
         - [TOC](#toc)
     - [October](#october)
     - [November](#november)
@@ -189,6 +192,42 @@ console.log(digital_root(493193));
 
 **Learning Target**
 ***you can call a function inside of a function with a different argument***
+
+#### [wholikesit?](September/wholikesit.js)
+**Input and Output**
+```
+// []                                -->  "no one likes this"
+// ["Peter"]                         -->  "Peter likes this"
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+```
+**Answer**
+```JavaScript
+function likes(names) {
+    console.log(names.length)
+    if (names.length == 0) {
+        return `no one likes this`
+    }
+    if (names.length == 1) {
+        return `${names[0]} likes this`
+    }
+    if (names.length == 2) {
+        return `${names[0]} and ${names[1]} like this`
+    }
+    if (names.length == 3) {
+        return `${names[0]}, ${names[1]} and ${names[2]} like this`
+    }
+    if (names.length > 3)  {
+        return `${names[0]}, ${names[1]} and ${names.length-2} others like this`
+    }
+  }
+
+```
+**Learning Target**
+### [Array.prototype.shift](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/array/shift)
+-***returns the first item of the array***
+### [JavaScript Template Literals](https://www.w3schools.com/JS//js_string_templates.asp)
 ##### [TOC](#table-of-contents)
 
 ### October
