@@ -19,3 +19,7 @@ console.log(disemvowel("This website is for losers LOL!"))
 function disemvowel(str) {
     return str.replace(/[aeiou]/gi, '');
   }
+
+  let x = [1,2,3]
+
+  console.log(x.length)
