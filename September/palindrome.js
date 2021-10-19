@@ -10,3 +10,4 @@ if (base == compare) {
 }
 
 console.log(check('Cac'))
+
